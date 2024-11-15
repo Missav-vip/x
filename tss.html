@@ -80,12 +80,39 @@
             color: #f4f4f4;
         }
 
-        @media (max-width: 600px) {
+        /* Responsif untuk perangkat kecil */
+        @media (max-width: 768px) {
             .saldo-container {
-                width: 90%;
+                width: 90%; /* Lebar 90% pada tablet */
+                height: 250px; /* Tinggi lebih kecil */
             }
+
+            .coin-logo img {
+                width: 50px; /* Ukuran logo lebih kecil */
+                height: 50px;
+            }
+
+            .coin-saldo {
+                font-size: 18px; /* Ukuran teks lebih kecil */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .saldo-container {
+                height: 200px; /* Tinggi lebih kecil untuk smartphone */
+            }
+
             .saldo-coins {
-                flex-direction: column;
+                flex-direction: column; /* Tumpukan vertikal untuk smartphone */
+            }
+
+            .coin-logo img {
+                width: 40px; /* Ukuran logo lebih kecil */
+                height: 40px;
+            }
+
+            .coin-saldo {
+                font-size: 16px; /* Ukuran teks lebih kecil */
             }
         }
     </style>
