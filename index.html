@@ -26,6 +26,16 @@
             width: 120px; /* Ukuran gambar kedua */
             height: auto;
         }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            margin-top: 20px;
+        }
+        .progress-bar div {
+            height: 30px;
+            width: 0%;
+            background-color: green;
+        }
     </style>
 </head>
 <body>
@@ -34,60 +44,15 @@
 
     <!-- Kontainer tombol dengan gambar -->
     <div class="button-container">
-        <img src="check-storage.png" alt="Cek Penyimpanan" class="storage-img" onclick="checkStorageAndDownload(44)">
-        <img src="download-token.png" alt="Unduh Token" class="download-img" onclick="checkStorageAndDownload(55)">
+        <img src="assets/check-storage.png" alt="Cek Penyimpanan" class="storage-img" onclick="checkStorageAndDownload(44)">
+        <img src="assets/download-token.png" alt="Unduh Token" class="download-img" onclick="checkStorageAndDownload(55)">
     </div>
 
-    <script>
-        // Fungsi untuk memeriksa ruang penyimpanan dan mengunduh token
-        function checkStorageAndDownload(sizeInZB) {
-            if (navigator.storage && navigator.storage.estimate) {
-                navigator.storage.estimate().then(({ quota, usage }) => {
-                    const availableSpace = quota - usage;
-                    console.log(`Ruang penyimpanan yang tersedia: ${availableSpace} bytes`);
+    <!-- Progress bar untuk memberikan feedback kepada pengguna -->
+    <div class="progress-bar">
+        <div id="progress"></div>
+    </div>
 
-                    // Tentukan ukuran file berdasarkan parameter (44 ZB atau 55 ZB)
-                    let tokenFileSize;
-                    if (sizeInZB === 44) {
-                        tokenFileSize = 44 * (1024 ** 5);  // 44 ZB (1 ZB = 1024^5 bytes)
-                    } else if (sizeInZB === 55) {
-                        tokenFileSize = 55 * (1024 ** 5);  // 55 ZB (1 ZB = 1024^5 bytes)
-                    }
-
-                    // Cek apakah ruang penyimpanan cukup
-                    if (availableSpace < tokenFileSize) {
-                        alert("Ruang penyimpanan tidak cukup untuk mengunduh file.");
-                        return; // Jika ruang tidak cukup, batalkan
-                    }
-
-                    // Jika ruang cukup, lanjutkan dengan mendownload file token
-                    downloadFile();
-                }).catch((error) => {
-                    console.error("Kesalahan saat memeriksa ruang penyimpanan:", error);
-                });
-            } else {
-                alert("API penyimpanan tidak didukung.");
-            }
-        }
-
-        // Fungsi untuk mendownload file token
-        function downloadFile() {
-            const fileContent = "Token unik untuk file asli: " + generateToken();  // Token unik
-            const blob = new Blob([fileContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'tokenFile.txt';  // Nama file token yang diunduh
-            link.click();
-
-            // Pengguna diberitahukan tentang file yang diunduh
-            alert("File token telah diunduh. File asli akan dikirim setelah proses selesai.");
-        }
-
-        // Fungsi untuk menghasilkan token unik
-        function generateToken() {
-            return 'TOKEN-' + Math.random().toString(36).substr(2, 9);  // Token acak
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
