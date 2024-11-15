@@ -1,0 +1,405 @@
+Pisahkan pernahkan jangan di hapus/ di ubah
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner Foto dengan Teks di Dalam</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 10px;
+    }
+
+    .banner {
+      background-image: url('img/IMG_8331.png');
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      height: 200px;
+      margin: 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .banner-title {
+      font-size: 32px;
+      margin: 10px 0;
+    }
+
+    .banner-subtitle {
+      font-size: 24px;
+      margin: 5px 0;
+    }
+
+    @media (max-width: 480px) {
+      .banner {
+        height: 100px;
+      }
+      .banner-title { font-size: 18px; }
+      .banner-subtitle { font-size: 14px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .banner {
+        height: 150px;
+      }
+      .banner-title { font-size: 22px; }
+      .banner-subtitle { font-size: 18px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .banner {
+        height: 200px;
+      }
+      .banner-title { font-size: 26px; }
+      .banner-subtitle { font-size: 20px; }
+    }
+
+    @media (min-width: 1025px) {
+      .banner {
+        height: 300px;
+      }
+      .banner-title { font-size: 32px; }
+      .banner-subtitle { font-size: 24px; }
+    }
+
+    .photo-carousel {
+      display: flex;
+      overflow-x: scroll;
+      gap: 10px;
+      background-color: #333;
+      border-radius: 10px;
+      padding: 10px 0;
+    }
+
+    .photo-item {
+      text-align: center;
+      color: white;
+    }
+
+    .photo-item img {
+      object-fit: cover;
+      border-radius: 50%;
+      background-color: #666;
+    }
+
+    .photo-item img {
+      width: 30px;
+      height: 30px;
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .photo-item img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .photo-item img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .photo-item img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .photo-carousel a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .photo-item div {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .image-gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 10px 0;
+    }
+
+    .gallery-item {
+      flex: 0 0 auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      background-color: #333;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .gallery-item div {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      padding: 5px;
+      font-size: 14px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .balance-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .balance-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .balance-item img {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 5px;
+    }
+
+    .balance-item span {
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .balance-item img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .balance-item span {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .balance-item img {
+        width: 15px;
+        height: 15px;
+      }
+
+      .balance-item span {
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="banner">
+      <h1 class="banner-title">Nama Web</h1>
+      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
+      <h3 class="banner-subtitle">Nama Lainnya</h3>
+      <h4 class="banner-subtitle">Nama Lainnya</h4>
+    </div>
+
+    <div class="balance-section">
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+        <span>1928283883737</span>
+      </div>
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+        <span>37373663737383833</span>
+      </div>
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+        <span>7337733663638833</span>
+      </div>
+    </div>
+
+    <div class="photo-carousel">
+      <a href="halaman1.html" target="_self" class="photo-item" onclick="checkStorageAndDownload(44)">
+        <img src="AC448134-503A-4EF1-A03D-0A672F2FBC38.png" alt="Image 1">
+        <div class="photo-item">1</div>
+      </a>
+      <a href="halaman2.html" target="_self" class="photo-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="Image 2">
+        <div class="photo-item">2</div>
+      </a>
+      <a href="halaman3.html" target="_self" class="photo-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="Image 3">
+        <div class="photo-item">3</div>
+      </a>
+      <a href="halaman4.html" target="_self" class="photo-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="Image 4">
+        <div class="photo-item">4</div>
+      </a>
+    </div>
+
+    <div class="image-gallery">
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="USA">
+        <div>AMERICA</div>
+      </div>
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="RUSIA">
+        <div>RUSIA</div>
+      </div>
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="CANADA">
+        <div>CANADA</div>
+      </div>
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="PHILIPINA">
+        <div>PHILIPINA</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to check available storage
+    function checkStorageAndDownload(sizeInZB) {
+      if (navigator.storage && navigator.storage.estimate) {
+        navigator.storage.estimate().then((storage) => {
+          const availableSpace = storage.quota - storage.usage;
+          if (availableSpace >= sizeInZB * Math.pow(1024, 5)) { // Convert size from ZB to bytes
+            alert('Sufficient storage. Proceeding to download...');
+            checkUserLocation(); // Proceed to location check
+          } else {
+            alert('Insufficient storage space for the file.');
+          }
+        }).catch((error) => {
+          alert('Error checking storage: ' + error);
+        });
+      } else {
+        alert('Storage estimation not supported by this browser.');
+      }
+    }
+
+    // Function to check user's location
+    function checkUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const highRiskAreas = [
+            { lat: 35.3606, lng: 137.4280 }, // Example location: Mount Fuji
+            { lat: 38.2970, lng: 141.0196 }  // Example location: Fukushima
+          ];
+
+          const isHighRisk = highRiskAreas.some(area => {
+            const distance = Math.sqrt(
+              Math.pow(latitude - area.lat, 2) + Math.pow(longitude - area.lng, 2)
+            );
+            return distance < 0.1; // Rough check for proximity
+          });
+
+          if (isHighRisk) {
+            generateTokenAndDownload();
+          } else {
+            alert('Download is only allowed in high-risk areas.');
+          }
+        }, (error) => {
+          alert('Error getting geolocation: ' + error.message);
+        });
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    }
+
+    // Function to generate a random token, encrypt it, and start download
+    function generateTokenAndDownload() {
+      const token = generateRandomToken();
+      const encryptedToken = encryptToken(token);
+
+      // Save the token and its expiration time
+      const expirationTime = Date.now() + 24 * 60 * 60 * 1000; // 24 hours from now
+      sessionStorage.setItem('token', encryptedToken);
+      sessionStorage.setItem('expiration', expirationTime);
+
+      // Create a download file with the encrypted token
+      const blob = new Blob([encryptedToken], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'tokenFile.txt';
+      link.click();
+    }
+
+    // Function to generate a random token of 22 characters
+    function generateRandomToken() {
+      const charset = 'あいうえおかきくけこさしすせそたちつてとにぬねのまみむめもやゆよらりるれろわをんABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let token = '';
+      for (let i = 0; i < 22; i++) {
+        token += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+      return token;
+    }
+
+    // Simple encryption (reverse the string)
+    function encryptToken(token) {
+      return token.split('').reverse().join('');
+    }
+
+    // Function to check if the token is expired
+    function checkTokenExpiration() {
+      const expirationTime = sessionStorage.getItem('expiration');
+      if (expirationTime && Date.now() > expirationTime) {
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('expiration');
+        alert('Token has expired. Please generate a new one.');
+      } else {
+        alert('Token is still valid.');
+      }
+    }
+
+    // Update progress bar (dummy example, you can modify to reflect actual progress)
+    function updateProgressBar(percent) {
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.width = percent + '%';
+    }
+
+    // Function to prevent device enumeration
+    function disableDeviceEnumeration() {
+      navigator.mediaDevices.enumerateDevices = function() {
+        return Promise.resolve([]);
+      };
+    }
+
+    // Call disableDeviceEnumeration to prevent device enumeration at page load
+    disableDeviceEnumeration();
+  </script>
+</body>
+</html>
