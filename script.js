@@ -1,101 +1,77 @@
-let currentToken = '';  // Token global yang akan diperbarui setiap kali unduhan sukses
-
-// Fungsi untuk memeriksa ruang penyimpanan dan mengunduh token
 function checkStorageAndDownload(sizeInZB) {
-    if (navigator.storage && navigator.storage.estimate) {
-        navigator.storage.estimate().then(({ quota, usage }) => {
-            const availableSpace = quota - usage;
-            console.log(`Ruang penyimpanan yang tersedia: ${availableSpace} bytes`);
-
-            // Tentukan ukuran file berdasarkan parameter (44 ZB atau 55 ZB)
-            let tokenFileSize;
-            if (sizeInZB === 44) {
-                tokenFileSize = 44 * (1024 ** 5);  // 44 ZB (1 ZB = 1024^5 bytes)
-            } else if (sizeInZB === 55) {
-                tokenFileSize = 55 * (1024 ** 5);  // 55 ZB (1 ZB = 1024^5 bytes)
-            }
-
-            // Cek apakah ruang penyimpanan cukup
-            if (availableSpace < tokenFileSize) {
-                alert("Ruang penyimpanan tidak cukup untuk mengunduh file.");
-                return; // Jika ruang tidak cukup, batalkan
-            }
-
-            // Tampilkan progress bar
-            updateProgressBar(20); // Update ke 20% untuk menunjukkan pengecekan ruang penyimpanan
-
-            // Jika ruang cukup, lanjutkan dengan mendownload file token
-            downloadFile();
-        }).catch((error) => {
-            console.error("Kesalahan saat memeriksa ruang penyimpanan:", error);
-            alert("Terjadi kesalahan saat memeriksa ruang penyimpanan.");
-        });
-    } else {
-        alert("API penyimpanan tidak didukung di browser ini.");
-    }
+  if (navigator.storage && navigator.storage.estimate) {
+    navigator.storage.estimate().then((storage) => {
+      const availableSpace = storage.quota - storage.usage;
+      if (availableSpace >= sizeInZB * Math.pow(1024, 5)) {
+        alert('Sufficient storage. Proceeding to download...');
+        checkUserLocation();
+      } else {
+        alert('Insufficient storage space for the file.');
+      }
+    }).catch((error) => {
+      alert('Error checking storage: ' + error);
+    });
+  } else {
+    alert('Storage estimation not supported by this browser.');
+  }
 }
 
-// Fungsi untuk mendownload file token
-function downloadFile() {
-    try {
-        // Perbarui token sebelum mendownload
-        currentToken = generateToken();  // Menghasilkan token baru
-        // Menyimpan token dan waktu kadaluarsa di localStorage
-        const expirationTime = new Date().getTime() + (24 * 60 * 60 * 1000); // Kadaluarsa dalam 24 jam
-        localStorage.setItem("downloadToken", currentToken); 
-        localStorage.setItem("tokenExpirationTime", expirationTime); 
+function checkUserLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const highRiskAreas = [
+        { lat: 35.3606, lng: 137.4280 },
+        { lat: 38.2970, lng: 141.0196 }
+      ];
 
-        const fileContent = "Token unik untuk file asli: " + currentToken;  // Token unik
-        const blob = new Blob([fileContent], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'tokenFile.txt';  // Nama file token yang diunduh
-        link.click();
+      const isHighRisk = highRiskAreas.some(area => {
+        const distance = Math.sqrt(
+          Math.pow(latitude - area.lat, 2) + Math.pow(longitude - area.lng, 2)
+        );
+        return distance < 0.1;
+      });
 
-        // Update progress bar ke 100% saat file berhasil diunduh
-        updateProgressBar(100);
-        // Pengguna diberitahukan tentang file yang diunduh
-        alert("File token telah diunduh. Token baru: " + currentToken);
-    } catch (error) {
-        console.error("Terjadi kesalahan saat membuat atau mengunduh file token:", error);
-        alert("Terjadi kesalahan saat mengunduh token. Silakan coba lagi.");
-        // Update progress bar untuk error
-        updateProgressBar(0);
-    }
+      if (isHighRisk) {
+        generateTokenAndDownload();
+      } else {
+        alert('Download is only allowed in high-risk areas.');
+      }
+    }, (error) => {
+      alert('Error getting geolocation: ' + error.message);
+    });
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
 }
 
-// Fungsi untuk menghasilkan token unik (22 digit dengan karakter Jepang dan Rusia)
-function generateToken() {
-    const length = 22; // Panjang token 22 karakter
-    const charset = 'あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんАБВГҐДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯабвгдеёжзийклмнопрстуфхцчшщэюя';
-    let token = '';
-    const array = new Uint32Array(length);
-    crypto.getRandomValues(array);  // Gunakan API kriptografi untuk nilai acak lebih aman
-    for (let i = 0; i < length; i++) {
-        token += charset.charAt(array[i] % charset.length);  // Ambil karakter acak dari charset
-    }
-    return token;
+function generateTokenAndDownload() {
+  const token = generateRandomToken();
+  const encryptedToken = encryptToken(token);
+
+  const expirationTime = Date.now() + 24 * 60 * 60 * 1000;
+  sessionStorage.setItem('token', encryptedToken);
+  sessionStorage.setItem('expiration', expirationTime);
+
+  const blob = new Blob([encryptedToken], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'tokenFile.txt';
+  link.click();
 }
 
-// Fungsi untuk memperbarui progress bar
-function updateProgressBar(percent) {
-    const progress = document.getElementById('progress');
-    progress.style.width = percent + '%';
+function generateRandomToken() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let token = '';
+  for (let i = 0; i < 20; i++) {
+    token += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return token;
 }
 
-// Fungsi untuk memeriksa kadaluarsa token
-function checkTokenExpiration() {
-    const expirationTime = localStorage.getItem("tokenExpirationTime");
-    if (expirationTime) {
-        const currentTime = new Date().getTime();
-        if (currentTime > expirationTime) {
-            // Jika token sudah kadaluarsa, hapus dari localStorage
-            localStorage.removeItem("downloadToken");
-            localStorage.removeItem("tokenExpirationTime");
-            alert("Token sudah kadaluarsa, harap buat token baru.");
-        } else {
-            alert("Token masih berlaku.");
-        }
-    }
+function encryptToken(token) {
+  const key = 'secret-key';
+  const encryptedToken = btoa(token + key);
+  return encryptedToken;
 }
