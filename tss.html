@@ -26,7 +26,7 @@
             text-align: center; /* Menyelaraskan teks di tengah */
         }
 
-        /* Latar belakang gambar yang transparan */
+        /* Gambar yang Anda kirim menutupi seluruh area */
         .saldo-container::before {
             content: '';
             position: absolute;
@@ -34,11 +34,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('IMG_8402.png'); /* Ganti dengan gambar transparan */
+            background-image: url('IMG_8402.png'); /* Ganti dengan gambar yang Anda kirim */
             background-size: cover; /* Gambar menyesuaikan ukuran kontainer */
             background-position: center; /* Menjaga gambar tetap terpusat */
-            opacity: 0.6; /* Transparansi gambar disesuaikan agar lebih jelas */
-            z-index: 1;
+            opacity: 1; /* Pastikan gambar sepenuhnya terlihat */
+            z-index: 1; /* Gambar berada di bawah konten */
         }
 
         /* Konten di dalam saldo (di atas gambar latar belakang) */
