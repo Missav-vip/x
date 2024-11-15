@@ -1,34 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unduh Token untuk File Asli</title>
 </head>
 <body>
-    <h1>Unduh Token File untuk Akses File Asli</h1>
-    <p>Klik gambar untuk mengunduh file token (50MB).</p>
-
-    <!-- Gambar yang bisa diklik -->
-    <img src="your-image-url.jpg" alt="Klik untuk mengunduh" style="cursor: pointer;" onclick="downloadLargeFile()">
+    <h1>Unduh Token untuk Akses File Asli</h1>
+    <p>File tidak dapat dipecah. Pastikan Anda memiliki ruang yang cukup sebelum melanjutkan.</p>
+    <button onclick="checkStorageAndDownload()">Cek Penyimpanan dan Unduh Token</button>
 
     <script>
-        // Fungsi untuk mendownload file besar (50MB)
-        function downloadLargeFile() {
-            const fileSizeInMB = 50;  // Ukuran file yang diinginkan dalam MB (50MB)
-            let fileContent = "";
+        // Fungsi untuk memeriksa ruang penyimpanan
+        function checkStorageAndDownload() {
+            if (navigator.storage && navigator.storage.estimate) {
+                navigator.storage.estimate().then(({ quota, usage }) => {
+                    const availableSpace = quota - usage;
+                    console.log(`Ruang penyimpanan yang tersedia: ${availableSpace} bytes`);
 
-            // Menghitung berapa banyak token yang perlu dimasukkan untuk mencapai ukuran file 50MB
-            for (let i = 0; i < fileSizeInMB * 1024 * 1024 / 10; i++) {
-                fileContent += "Token unik: " + generateToken() + "\n";
+                    // Tentukan ukuran file token (misalnya 1GB)
+const tokenFileSize = 55 * (1024 ** 5);  // 55 ZB
+
+                    // Cek apakah ruang penyimpanan cukup
+                    if (availableSpace < tokenFileSize) {
+                        alert("Ruang penyimpanan tidak cukup untuk mengunduh file.");
+                        return; // Jika ruang tidak cukup, batalkan
+                    }
+
+                    // Jika ruang cukup, lanjutkan dengan mendownload file token
+                    downloadFile();
+                }).catch((error) => {
+                    console.error("Kesalahan saat memeriksa ruang penyimpanan:", error);
+                });
+            } else {
+                alert("API penyimpanan tidak didukung.");
             }
+        }
 
+        // Fungsi untuk mendownload file token
+        function downloadFile() {
+            const fileContent = "Token unik untuk file asli: " + generateToken();  // Token unik
             const blob = new Blob([fileContent], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'fileToken50MB.txt';  // Nama file token yang diunduh
+            link.download = 'tokenFile.txt';  // Nama file token yang diunduh
             link.click();
+
+            // Pengguna diberitahukan tentang file yang diunduh
+            alert("File token telah diunduh. File asli akan dikirim setelah proses selesai.");
         }
 
         // Fungsi untuk menghasilkan token unik
