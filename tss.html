@@ -19,52 +19,39 @@
             position: relative;
             width: 80%;
             max-width: 600px;
-            height: 300px;
-            background-color: rgba(44, 44, 46, 0.8);
+            background-color: rgba(44, 44, 46, 0.8); /* Transparansi */
             border-radius: 15px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
 
-        /* Gambar pertama menutupi sebagian */
+        /* Latar belakang gambar (cover image) */
         .cover-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('IMG_8402.png'); /* Gambar pertama */
+            background-image: url('IMG_8402.png'); /* Ganti dengan gambar Anda */
             background-size: cover;
             background-position: center;
-            z-index: 2;
+            z-index: 1;
         }
 
-        /* Gambar kedua menutupi semuanya */
-        .cover-image-2 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('IMG_8402.png'); /* Gambar kedua */
-            background-size: cover;
-            background-position: center;
-            opacity: 1;
-            z-index: 3; /* Lapisan paling atas */
-        }
-
-        /* Konten saldo (di bawah gambar penutup) */
+        /* Konten saldo (terletak di atas latar belakang) */
         .saldo-content {
             position: relative;
-            z-index: 1; /* Di bawah gambar penutup */
+            z-index: 2;
+            padding: 20px;
             text-align: center;
-            padding-top: 50px;
         }
 
+        /* Styling untuk logo koin dan saldo */
         .saldo-coins {
             display: flex;
-            justify-content: space-evenly;
-            margin-bottom: 10px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
         .coin-logo img {
@@ -80,39 +67,35 @@
             color: #f4f4f4;
         }
 
+        .coin-saldo span {
+            font-size: 24px;
+            color: gold;
+        }
+
         /* Responsif untuk perangkat kecil */
         @media (max-width: 768px) {
             .saldo-container {
-                width: 90%; /* Lebar 90% pada tablet */
-                height: 250px; /* Tinggi lebih kecil */
+                width: 90%; /* Lebar lebih kecil */
             }
 
             .coin-logo img {
-                width: 50px; /* Ukuran logo lebih kecil */
+                width: 50px;
                 height: 50px;
             }
 
             .coin-saldo {
-                font-size: 18px; /* Ukuran teks lebih kecil */
+                font-size: 18px;
             }
         }
 
         @media (max-width: 480px) {
-            .saldo-container {
-                height: 200px; /* Tinggi lebih kecil untuk smartphone */
-            }
-
-            .saldo-coins {
-                flex-direction: column; /* Tumpukan vertikal untuk smartphone */
-            }
-
             .coin-logo img {
-                width: 40px; /* Ukuran logo lebih kecil */
+                width: 40px;
                 height: 40px;
             }
 
             .coin-saldo {
-                font-size: 16px; /* Ukuran teks lebih kecil */
+                font-size: 16px;
             }
         }
     </style>
@@ -120,25 +103,26 @@
 <body>
     <div class="saldo-wrapper">
         <div class="saldo-container">
-            <!-- Gambar pertama -->
+            <!-- Latar belakang gambar -->
             <div class="cover-image"></div>
-            <!-- Gambar kedua -->
-            <div class="cover-image-2"></div>
 
             <!-- Konten saldo -->
             <div class="saldo-content">
                 <div class="saldo-coins">
+                    <!-- Logo dan Saldo Bitcoin -->
                     <div class="coin-logo">
                         <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin">
                         <div class="coin-saldo">BTC: <span>1,234,567</span></div>
                     </div>
+                    <!-- Logo dan Saldo Ethereum -->
                     <div class="coin-logo">
                         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum">
-                        <div class="coin-saldo"><span>1,234,567</span></div>
+                        <div class="coin-saldo">ETH: <span>2,345,678</span></div>
                     </div>
+                    <!-- Logo dan Saldo Litecoin -->
                     <div class="coin-logo">
                         <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" alt="Litecoin">
-                        <div class="coin-saldo"><span>1,234,567</span></div>
+                        <div class="coin-saldo">LTC: <span>3,456,789</span></div>
                     </div>
                 </div>
             </div>
