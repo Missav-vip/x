@@ -17,26 +17,14 @@
         /* Container utama saldo, dengan latar belakang transparan */
         .saldo-container {
             position: relative;
-            width: 100%; /* Memastikan kontainer memanjang penuh */
+            width: 80%; /* Lebar 80% dari layar */
+            max-width: 600px; /* Maksimal lebar 600px */
             height: 300px;
             background-color: rgba(44, 44, 46, 0.8); /* Latar belakang abu-abu semi-transparan */
             border-radius: 15px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             text-align: center; /* Menyelaraskan teks di tengah */
-        }
-
-        /* Gambar latar belakang memanjang seluruh area */
-        .saldo-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #2c2f36; /* Warna latar belakang abu-abu */
-            opacity: 1; /* Pastikan latar belakang sepenuhnya terlihat */
-            z-index: 1; /* Latar belakang berada di bawah konten */
         }
 
         /* Konten di dalam saldo (di atas gambar latar belakang) */
@@ -90,6 +78,20 @@
             transition: color 0.3s ease;
         }
 
+        /* Menambahkan gambar penutup dengan posisi absolute di atas logo dan saldo */
+        .cover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cryptologos.cc/logos/bitcoin-btc-logo.png'); /* Ganti dengan gambar penutup */
+            background-size: cover;
+            background-position: center;
+            opacity: 1; /* Tidak transparan, menutupi 100% */
+            z-index: 5;
+        }
+
         /* Responsif: Menyesuaikan pada perangkat kecil (smartphone) */
         @media (max-width: 600px) {
             .saldo-container {
@@ -104,6 +106,9 @@
 <body>
     <div class="saldo-wrapper">
         <div class="saldo-container">
+            <!-- Gambar yang akan menutupi logo dan saldo -->
+            <div class="cover-image"></div>
+
             <!-- Konten saldo -->
             <div class="saldo-content">
                 <!-- Bagian Koin -->
