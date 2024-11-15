@@ -17,8 +17,8 @@
         /* Container utama saldo, dengan latar belakang transparan */
         .saldo-container {
             position: relative;
-            width: 100%;
-            max-width: 500px; /* Lebar maksimal */
+            width: 80%; /* Lebar 80% dari layar */
+            max-width: 600px; /* Maksimal lebar 600px */
             height: 300px;
             background-color: rgba(44, 44, 46, 0.8); /* Latar belakang abu-abu semi-transparan */
             border-radius: 15px;
@@ -46,23 +46,24 @@
         .saldo-content {
             position: relative;
             z-index: 2; /* Menempatkan konten di atas gambar */
-            padding-top: 10px;
+            padding-top: 50px;
         }
 
         /* Styling untuk logo koin dan saldo */
         .saldo-coins {
             display: flex;
-            flex-direction: column; /* Mengatur logo dan saldo vertikal */
-            justify-content: center;
-            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row; /* Menumpuk secara horizontal */
             margin-bottom: 10px;
+            z-index: 3;
+            width: 100%; /* Menyesuaikan dengan lebar kontainer */
         }
 
         /* Styling untuk gambar logo koin */
         .coin-logo {
             position: relative;
             z-index: 3;
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Menambahkan jarak antar logo */
         }
 
         .coin-logo img {
@@ -78,7 +79,7 @@
             font-size: 22px;
             font-weight: bold;
             color: #f4f4f4;
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
         .coin-saldo span {
@@ -92,26 +93,15 @@
             transition: color 0.3s ease;
         }
 
-        /* Responsif untuk tampilan mobile dan tablet */
-        @media screen and (max-width: 768px) {
+        /* Responsif: Menyesuaikan pada perangkat kecil (smartphone) */
+        @media (max-width: 600px) {
             .saldo-container {
-                height: 250px; /* Mengurangi tinggi pada layar kecil */
+                width: 90%; /* Lebar 90% pada layar kecil */
             }
-
-            .coin-logo img {
-                width: 50px;
-                height: 50px;
-            }
-
-            .coin-saldo {
-                font-size: 20px;
-            }
-
-            .coin-saldo span {
-                font-size: 22px;
+            .saldo-coins {
+                flex-direction: column; /* Menumpuk secara vertikal pada layar kecil */
             }
         }
-
     </style>
 </head>
 <body>
