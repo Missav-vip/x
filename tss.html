@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saldo dengan Garis Kiri dan Kanan</title>
+  <title>Saldo dengan Garis Kiri dan Kanan Memanjang</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,17 +17,18 @@
 
     .saldo-container {
       display: flex;
-      align-items: center;
       justify-content: center;
-      width: 80%;
+      align-items: center;
+      width: 100%;
     }
 
-    /* Garis Kiri */
+    /* Garis kiri */
     .line-left {
       background-color: #333;
       height: 10px;
-      width: 50px;
+      width: 200px; /* Garis memanjang */
       border-radius: 5px;
+      margin-right: 10px;
     }
 
     /* Kotak Saldo */
@@ -38,7 +39,6 @@
       justify-content: center;
       background-color: white;
       padding: 15px;
-      margin: 0 20px;
       border-radius: 15px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       width: 200px;
@@ -55,12 +55,13 @@
       font-size: 16px;
     }
 
-    /* Garis Kanan */
+    /* Garis kanan */
     .line-right {
       background-color: #333;
       height: 10px;
-      width: 50px;
+      width: 200px; /* Garis memanjang */
       border-radius: 5px;
+      margin-left: 10px;
     }
   </style>
 </head>
@@ -70,7 +71,7 @@
     <!-- Garis Kiri -->
     <div class="line-left"></div>
 
-    <!-- Kotak Saldo dengan Logo dan Nomor -->
+    <!-- Kotak Saldo -->
     <div class="saldo-box-wrapper">
       <!-- Saldo Ethereum -->
       <div class="saldo-box">
