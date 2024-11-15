@@ -1,117 +1,88 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saldo dengan Logo dan Koin</title>
+  <title>Saldo dengan Logo</title>
   <style>
-    /* Kontainer Utama */
-    .saldo-container {
+    body {
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f0f0f0; /* Latar belakang halaman */
+      margin: 0;
+      background-color: #f0f0f0;
     }
 
-    /* Garis Kiri dan Kanan */
-    .left-border, .right-border {
-      width: 20px; /* Lebar garis kiri dan kanan */
-      background-color: #000; /* Warna garis */
-      height: 100%;
+    .saldo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
-    /* Kotak Saldo Utama */
     .saldo-box {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      background-color: #fff;  /* Latar belakang kotak */
-      width: 300px;  /* Lebar kotak */
-      padding: 20px;
-      border-radius: 15px;
-      border: 3px solid #000;  /* Garis pembatas kotak */
+      background-color: rgba(0,0,0,0); /* Transparan di dalam */
+      border: 3px solid #000; /* Garis tepi kotak */
+      border-radius: 10px;
+      width: 300px; /* Lebar kotak */
     }
 
-    /* Garis Atas dan Bawah */
-    .top-border, .bottom-border {
+    .top-line, .bottom-line {
       width: 100%;
-      height: 3px;
-      background-color: #000; /* Warna garis */
+      height: 5px;
+      background-color: #000; /* Garis panjang */
     }
 
-    /* Logo */
-    .logo img {
-      width: 80px;  /* Ukuran logo */
-      height: auto;
-      margin: 20px 0;
+    .box-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
     }
 
-    /* Angka Saldo */
-    .number span {
-      font-size: 36px;  /* Ukuran angka */
-      font-weight: bold;
-    }
-
-    /* Koin Container */
-    .coin-container {
+    .logo-container {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
-    /* Koin */
-    .coin {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: gold; /* Warna koin */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .saldo-number {
+      font-size: 24px;
       font-weight: bold;
-      color: white;
     }
   </style>
 </head>
 <body>
 
-  <!-- Kontainer Saldo -->
   <div class="saldo-container">
-    <!-- Garis Kiri -->
-    <div class="left-border"></div>
-
-    <!-- Kotak Saldo Utama -->
     <div class="saldo-box">
-      <!-- Garis Atas -->
-      <div class="top-border"></div>
-      
-      <!-- Logo -->
-      <div class="logo">
-        <img src="https://via.placeholder.com/80" alt="Logo"> <!-- Ganti dengan logo yang sesuai -->
+      <!-- Garis atas -->
+      <div class="top-line"></div>
+      <!-- Konten kotak: logo dan angka saldo -->
+      <div class="box-content">
+        <div class="logo-container">
+          <!-- Ganti URL gambar dengan logo yang sesuai -->
+          <img src="https://via.placeholder.com/50x50?text=ETH" alt="Ethereum Logo" class="logo">
+          <img src="https://via.placeholder.com/50x50?text=BTC" alt="Bitcoin Logo" class="logo">
+        </div>
+        <div class="saldo-number">
+          <span>12345</span> <!-- Ganti dengan angka saldo yang sesuai -->
+        </div>
       </div>
-      
-      <!-- Angka Saldo -->
-      <div class="number">
-        <span>12345</span> <!-- Angka saldo -->
-      </div>
-      
-      <!-- Garis Bawah -->
-      <div class="bottom-border"></div>
-
-      <!-- Koin -->
-      <div class="coin-container">
-        <div class="coin">1</div>
-        <div class="coin">2</div>
-        <div class="coin">3</div>
-      </div>
+      <!-- Garis bawah -->
+      <div class="bottom-line"></div>
     </div>
-
-    <!-- Garis Kanan -->
-    <div class="right-border"></div>
   </div>
 
 </body>
