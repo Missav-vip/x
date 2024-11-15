@@ -23,6 +23,7 @@
             border-radius: 15px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            text-align: center; /* Menyelaraskan teks di tengah */
         }
 
         /* Latar belakang gambar yang transparan */
@@ -36,7 +37,7 @@
             background-image: url('IMG_8402.png'); /* Ganti dengan gambar transparan */
             background-size: cover; /* Gambar menyesuaikan ukuran kontainer */
             background-position: center; /* Menjaga gambar tetap terpusat */
-            opacity: 0.4; /* Transparansi gambar */
+            opacity: 1; /* Transparansi gambar disesuaikan agar lebih jelas */
             z-index: 1;
         }
 
@@ -44,39 +45,29 @@
         .saldo-content {
             position: relative;
             z-index: 2; /* Menempatkan konten di atas gambar */
-            text-align: center;
-            color: white;
-            padding-top: 50px;
+            padding-top: 20px;
         }
 
         /* Styling untuk logo koin dan saldo */
         .saldo-coins {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             margin-bottom: 20px;
         }
 
         /* Styling untuk gambar logo koin */
         .coin-logo img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             border: 3px solid gold;
             padding: 5px;
         }
 
-        /* Angka saldo dengan 7 digit */
-        .saldo-number {
-            font-size: 20px;
-            font-weight: bold;
-            color: gold;
-            margin-top: 10px;
-        }
-
         /* Saldo untuk setiap koin */
         .coin-saldo {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: bold;
             color: #f4f4f4;
         }
@@ -85,6 +76,13 @@
             color: #fff;
             transition: color 0.3s ease;
         }
+
+        /* Styling untuk angka saldo 7 digit */
+        .coin-saldo span {
+            font-size: 24px;
+            color: gold;
+        }
+
     </style>
 </head>
 <body>
@@ -109,11 +107,17 @@
                 </div>
 
                 <!-- Saldo Bitcoin -->
-                <div class="coin-saldo">BTC: 1,234,567</div>
+                <div class="coin-saldo">
+                    BTC: <span>1,234,567</span>
+                </div>
                 <!-- Saldo Ethereum -->
-                <div class="coin-saldo">ETH: 1,234,567</div>
+                <div class="coin-saldo">
+                    ETH: <span>1,234,567</span>
+                </div>
                 <!-- Saldo Litecoin -->
-                <div class="coin-saldo">LT: 1,234,567</div>
+                <div class="coin-saldo">
+                    LT: <span>1,234,567</span>
+                </div>
             </div>
         </div>
     </div>
