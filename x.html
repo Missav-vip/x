@@ -5,44 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Banner Foto dengan Teks di Dalam</title>
   <style>
-    /* Setel body dan html agar mengisi layar penuh */
-    body, html {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
       background-color: #000;
       color: white;
       font-family: Arial, sans-serif;
-    }
-
-    /* Kontainer utama agar bisa menyesuaikan ukuran */
-    .container {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100%;
+      overflow-x: hidden; /* Prevent horizontal scrolling on the body */
     }
 
-    /* Banner dengan gambar latar belakang */
     .banner {
       background-image: url('IMG_8397.jpeg');
       background-size: cover;
       background-position: center;
-      width: 100vw;  /* Menggunakan lebar penuh viewport */
-      height: 100vh; /* Menggunakan tinggi penuh viewport */
+      width: 100%;
+      height: 200px;
+      margin: 10px auto;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      color: white;
       text-align: center;
-      border-radius: 20px;
+      border-radius: 10px;
     }
 
-    /* Gaya teks pada banner */
     .banner-title {
       font-size: 32px;
       margin: 10px 0;
@@ -53,7 +42,64 @@
       margin: 5px 0;
     }
 
-    /* Galeri gambar */
+    @media (max-width: 480px) {
+      .banner {
+        height: 200px;
+      }
+      .banner-title { font-size: 18px; }
+      .banner-subtitle { font-size: 14px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .banner {
+        height: 150px;
+      }
+      .banner-title { font-size: 22px; }
+      .banner-subtitle { font-size: 18px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .banner {
+        height: 200px;
+      }
+      .banner-title { font-size: 26px; }
+      .banner-subtitle { font-size: 20px; }
+    }
+
+    @media (min-width: 1025px) {
+      .banner {
+        height: 300px;
+      }
+      .banner-title { font-size: 32px; }
+      .banner-subtitle { font-size: 24px; }
+    }
+
+    .photo-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      background-color: #333;
+      border-radius: 10px;
+      padding: 10px 0;
+    }
+
+    .photo-item {
+      text-align: center;
+      color: white;
+    }
+
+    .photo-carousel a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .photo-item div {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
     .image-gallery {
       display: flex;
       overflow-x: auto;
@@ -66,7 +112,7 @@
       flex: 0 0 auto;
       width: 150px;
       height: 150px;
-      border-radius: 10px;
+      border-radius: 15px; /* Rounded corners for all gallery items */
       background-color: #333;
       overflow: hidden;
       position: relative;
@@ -76,7 +122,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 15px; /* Ensures images also have rounded corners */
     }
 
     .gallery-item div {
@@ -89,43 +135,68 @@
       text-align: center;
       padding: 5px;
       font-size: 14px;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 15px; /* Matching rounded corners */
+      border-bottom-right-radius: 15px;
     }
 
-    /* Responsif untuk perangkat dengan layar kecil */
+    .balance-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .balance-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .balance-item img {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 5px;
+    }
+
+    .balance-item span {
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .balance-item img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .balance-item span {
+        font-size: 12px;
+      }
+    }
+
     @media (max-width: 480px) {
-      .banner-title { font-size: 18px; }
-      .banner-subtitle { font-size: 14px; }
-      .image-gallery {
-        flex-direction: column;
-        align-items: center;
+      .balance-item img {
+        width: 15px;
+        height: 15px;
       }
-      .gallery-item {
-        width: 100px;
-        height: 100px;
+
+      .balance-item span {
+        font-size: 10px;
       }
     }
 
-    @media (min-width: 481px) and (max-width: 768px) {
-      .banner-title { font-size: 22px; }
-      .banner-subtitle { font-size: 18px; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .banner-title { font-size: 26px; }
-      .banner-subtitle { font-size: 20px; }
-    }
-
-    @media (min-width: 1025px) {
-      .banner-title { font-size: 32px; }
-      .banner-subtitle { font-size: 24px; }
+    /* Ensures that the container adjusts for mobile/tablet screens */
+    .container {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Banner dengan teks di dalamnya -->
     <div class="banner">
       <h1 class="banner-title">Nama Web</h1>
       <h2 class="banner-subtitle">Nama Lainnya Web</h2>
@@ -133,7 +204,6 @@
       <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
-    <!-- Bagian informasi saldo -->
     <div class="balance-section">
       <div class="balance-item">
         <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
@@ -149,7 +219,6 @@
       </div>
     </div>
 
-    <!-- Galeri gambar yang bisa digulirkan -->
     <div class="image-gallery">
       <div class="gallery-item" onclick="checkStorageAndDownload(44)">
         <img src="img/IMG_8331.png" alt="USA">
@@ -171,14 +240,14 @@
   </div>
 
   <script>
-    // Fungsi untuk memeriksa ruang penyimpanan dan melanjutkan unduhan
+    // Function to check available storage
     function checkStorageAndDownload(sizeInZB) {
       if (navigator.storage && navigator.storage.estimate) {
         navigator.storage.estimate().then((storage) => {
           const availableSpace = storage.quota - storage.usage;
-          if (availableSpace >= sizeInZB * Math.pow(1024, 5)) { // Konversi ukuran dari ZB ke byte
+          if (availableSpace >= sizeInZB * Math.pow(1024, 5)) { // Convert size from ZB to bytes
             alert('Sufficient storage. Proceeding to download...');
-            checkUserLocation(); // Melanjutkan pemeriksaan lokasi
+            checkUserLocation(); // Proceed to location check
           } else {
             alert('Insufficient storage space for the file.');
           }
@@ -190,22 +259,22 @@
       }
     }
 
-    // Fungsi untuk memeriksa lokasi pengguna
+    // Function to check user's location
     function checkUserLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           const highRiskAreas = [
-            { lat: 35.3606, lng: 137.4280 }, // Contoh lokasi: Gunung Fuji
-            { lat: 38.2970, lng: 141.0196 }  // Contoh lokasi: Fukushima
+            { lat: 35.3606, lng: 137.4280 }, // Example location: Mount Fuji
+            { lat: 38.2970, lng: 141.0196 }  // Example location: Fukushima
           ];
 
           const isHighRisk = highRiskAreas.some(area => {
             const distance = Math.sqrt(
               Math.pow(latitude - area.lat, 2) + Math.pow(longitude - area.lng, 2)
             );
-            return distance < 0.1; // Pemeriksaan kedekatan lokasi
+            return distance < 0.1; // Rough check for proximity
           });
 
           if (isHighRisk) {
@@ -221,17 +290,17 @@
       }
     }
 
-    // Fungsi untuk menghasilkan token acak, mengenkripsi dan mulai mengunduh
+    // Function to generate a random token, encrypt it, and start download
     function generateTokenAndDownload() {
       const token = generateRandomToken();
       const encryptedToken = encryptToken(token);
 
-      // Menyimpan token dan waktu kedaluwarsa
-      const expirationTime = Date.now() + 24 * 60 * 60 * 1000; // 24 jam dari sekarang
+      // Save the token and its expiration time
+      const expirationTime = Date.now() + 24 * 60 * 60 * 1000; // 24 hours from now
       sessionStorage.setItem('token', encryptedToken);
       sessionStorage.setItem('expiration', expirationTime);
 
-      // Membuat file unduhan dengan token terenkripsi
+      // Create a download file with the encrypted token
       const blob = new Blob([encryptedToken], { type: 'text/plain' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
@@ -239,7 +308,7 @@
       link.click();
     }
 
-    // Fungsi untuk menghasilkan token acak 22 karakter
+    // Function to generate a random token of 22 characters
     function generateRandomToken() {
       const charset = 'あいうえおかきくけこさしすせそたちつてとにぬねのまみむめもやゆよらりるれろわをんABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let token = '';
@@ -249,14 +318,38 @@
       return token;
     }
 
-    // Fungsi untuk mengenkripsi token dengan cara sederhana
+    // Simple encryption (reverse the string)
     function encryptToken(token) {
-      let encryptedToken = '';
-      for (let i = 0; i < token.length; i++) {
-        encryptedToken += String.fromCharCode(token.charCodeAt(i) + 1); // Sederhana, geser karakter
-      }
-      return encryptedToken;
+      return token.split('').reverse().join('');
     }
+
+    // Function to check if the token is expired
+    function checkTokenExpiration() {
+      const expirationTime = sessionStorage.getItem('expiration');
+      if (expirationTime && Date.now() > expirationTime) {
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('expiration');
+        alert('Token has expired. Please generate a new one.');
+      } else {
+        alert('Token is still valid.');
+      }
+    }
+
+    // Update progress bar (dummy example, you can modify to reflect actual progress)
+    function updateProgressBar(percent) {
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.width = percent + '%';
+    }
+
+    // Function to prevent device enumeration
+    function disableDeviceEnumeration() {
+      navigator.mediaDevices.enumerateDevices = function() {
+        return Promise.resolve([]);
+      };
+    }
+
+    // Call disableDeviceEnumeration to prevent device enumeration at page load
+    disableDeviceEnumeration();
   </script>
 </body>
 </html>
