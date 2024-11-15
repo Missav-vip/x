@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unduh Token untuk File Asli</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            text-align: center;
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .button-container img {
-            cursor: pointer;
-        }
-        .storage-img {
-            width: 200px; /* Ukuran gambar pertama */
-            height: auto;
-        }
-        .download-img {
-            width: 120px; /* Ukuran gambar kedua */
-            height: auto;
-        }
-        .progress-bar {
-            width: 100%;
-            background-color: #f3f3f3;
-            margin-top: 20px;
-        }
-        .progress-bar div {
-            height: 30px;
-            width: 0%;
-            background-color: green;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner Foto dengan Teks di Dalam</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Unduh Token untuk Akses File Asli</h1>
-    <p>File tidak dapat dipecah. Pastikan Anda memiliki ruang yang cukup sebelum melanjutkan.</p>
-
-    <!-- Kontainer tombol dengan gambar -->
-    <div class="button-container">
-        <img src="assets/check-storage.png" alt="Cek Penyimpanan" class="storage-img" onclick="checkStorageAndDownload(44)">
-        <img src="assets/download-token.png" alt="Unduh Token" class="download-img" onclick="checkStorageAndDownload(55)">
+  <div class="container">
+    <div class="banner">
+      <h1 class="banner-title">Nama Web</h1>
+      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
+      <h3 class="banner-subtitle">Nama Lainnya</h3>
+      <h4 class="banner-subtitle">Nama Lainnya</h4>
     </div>
 
-    <!-- Progress bar untuk memberikan feedback kepada pengguna -->
-    <div class="progress-bar">
-        <div id="progress"></div>
+    <div class="balance-section">
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo">
+        <span>1928283883737</span>
+      </div>
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo">
+        <span>37373663737383833</span>
+      </div>
+      <div class="balance-item">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo">
+        <span>7337733663638833</span>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="image-gallery">
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="USA">
+        <div>AMERICA</div>
+      </div>
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="RUSIA">
+        <div>RUSIA</div>
+      </div>
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="CANADA">
+        <div>CANADA</div>
+      </div>
+      <div class="gallery-item" onclick="checkStorageAndDownload(44)">
+        <img src="img/IMG_8331.png" alt="PHILIPINA">
+        <div>PHILIPINA</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
