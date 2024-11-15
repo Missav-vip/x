@@ -1,93 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saldo dengan 2 Latar Belakang</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saldo Mewah</title>
+    <style>
+        /* Wrapper utama agar saldo tampil di tengah halaman */
+        .saldo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Membuat saldo berada di tengah layar */
+            background-color: #2c2f36; /* Latar belakang gelap */
+        }
 
-    .saldo-container {
-      text-align: center;
-      padding: 20px;
-      width: 80%;
-      max-width: 500px;
-      box-sizing: border-box;
-    }
+        /* Container saldo dengan latar belakang abu-abu */
+        .saldo-container {
+            width: 350px;  /* Lebar saldo */
+            height: 250px; /* Tinggi saldo */
+            position: relative;
+            background-color: rgba(44, 44, 46, 0.8); /* Latar belakang gelap semi-transparan */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Bayangan agar tampak mewah */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
 
-    /* Latar belakang pertama (utama) untuk seluruh area */
-    .saldo-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-image: url('37E799D0-43CD-4770-9986-BC120D67A56A.png'); /* Ganti dengan gambar latar belakang utama */
-      background-size: cover;
-      background-position: center;
-      border-radius: 10px;
-      padding: 20px;
-      color: white;
-      position: relative;
-    }
+        /* Efek saat hover pada saldo */
+        .saldo-container:hover {
+            transform: scale(1.05); /* Meningkatkan ukuran sedikit saat hover */
+            box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.7); /* Efek bayangan lebih dramatis */
+        }
 
-    /* Latar belakang kedua untuk bagian atas kotak */
-    .top-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px; /* Tinggi bagian atas */
-      background-image: url('https://via.placeholder.com/500x60?text=Top+Background'); /* Ganti dengan gambar latar belakang atas */
-      background-size: cover;
-      background-position: center;
-      border-radius: 10px 10px 0 0; /* Untuk melengkungkan sudut atas */
-    }
+        /* Gambar transparan yang akan menutupi saldo */
+        .saldo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('transparent-image.png'); /* Gambar transparan yang diupload */
+            background-size: cover; /* Mengatur ukuran gambar agar pas */
+            background-position: center; /* Mengatur posisi gambar */
+            opacity: 0.6; /* Transparansi gambar */
+            z-index: 1; /* Agar gambar berada di belakang konten saldo */
+        }
 
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 15px;
-    }
+        /* Konten saldo yang ditampilkan di atas gambar transparan */
+        .saldo-content {
+            position: relative;
+            z-index: 2; /* Agar konten berada di atas gambar */
+            text-align: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
 
-    .logo {
-      width: 40px;
-      height: 40px;
-      margin: 0 10px;
-    }
+        /* Styling untuk logo di atas angka saldo */
+        .saldo-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%; /* Membuat logo berbentuk lingkaran */
+            border: 3px solid gold; /* Border emas untuk kesan mewah */
+            padding: 5px;
+        }
 
-    .saldo-number {
-      font-size: 32px;
-      font-weight: bold;
-    }
-  </style>
+        /* Styling untuk angka saldo */
+        .saldo-number {
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: gold; /* Warna emas untuk angka saldo */
+        }
+
+        /* Efek pada angka saldo saat hover */
+        .saldo-number:hover {
+            color: #fff; /* Mengubah warna teks saat hover */
+            transition: color 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="saldo-container">
-    <!-- Kotak saldo dengan gambar latar belakang utama -->
-    <div class="saldo-box">
-      <!-- Latar belakang atas (gambar kedua) -->
-      <div class="top-background"></div>
-
-      <!-- Konten saldo -->
-      <div class="logo-container">
-        <!-- Logo 1 (Ethereum) -->
-        <img src="https://via.placeholder.com/40x40?text=ETH" alt="Ethereum Logo" class="logo">
-        <!-- Logo 2 (Bitcoin) -->
-        <img src="https://via.placeholder.com/40x40?text=BTC" alt="Bitcoin Logo" class="logo">
-      </div>
-      <div class="saldo-number">
-        <span>12345</span> <!-- Ganti dengan angka saldo yang sesuai -->
-      </div>
+    <div class="saldo-wrapper">
+        <div class="saldo-container">
+            <!-- Gambar dan nomor saldo -->
+            <div class="saldo-content">
+                <div class="saldo-logo">
+                    <img src="your-logo.png" alt="Logo" /> <!-- Ganti dengan logo yang diinginkan -->
+                </div>
+                <div class="saldo-number">
+                    1000 USD <!-- Ganti dengan angka saldo yang diinginkan -->
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
 </body>
 </html>
