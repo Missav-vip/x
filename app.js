@@ -1,13 +1,13 @@
-// Fungsi untuk memeriksa ruang penyimpanan yang tersedia
+// Fungsi untuk memeriksa ruang penyimpanan yang tersedia dengan fallback
 function checkAvailableStorage(fileSize) {
     return new Promise((resolve, reject) => {
+        // Mengecek apakah navigator.storage didukung oleh browser
         if (navigator.storage && navigator.storage.estimate) {
             navigator.storage.estimate().then(({ quota, usage }) => {
                 const availableSpace = quota - usage;
                 console.log(`Ruang penyimpanan yang tersedia: ${availableSpace} bytes`);
 
-                // Membandingkan apakah ruang yang tersedia cukup untuk file 1000 TB
-                // 1 TB = 1,099,511,627,776 bytes, jadi 1000 TB = 1,099,511,627,776,000 bytes
+                // Menyusun ukuran ruang yang diperlukan untuk 1000TB (1000 * 1024^4 bytes)
                 const requiredSpace = 1000 * 1024 * 1024 * 1024 * 1024; // 1000 TB dalam bytes
 
                 if (availableSpace < requiredSpace) {
@@ -18,22 +18,15 @@ function checkAvailableStorage(fileSize) {
                 }
             }).catch((error) => {
                 console.error("Kesalahan saat memeriksa ruang penyimpanan:", error);
-                resolve(false); // Jika error, anggap tidak cukup ruang
+                alert("Terjadi kesalahan saat memeriksa ruang penyimpanan.");
+                resolve(false);  // Jika ada kesalahan, anggap tidak cukup ruang
             });
         } else {
-            console.log("API StorageManager tidak didukung.");
-            resolve(false); // Jika API StorageManager tidak didukung, anggap tidak cukup ruang
+            // Fallback jika navigator.storage tidak didukung oleh browser
+            console.log("API StorageManager tidak didukung. Pengunggahan diblokir.");
+            alert("Fitur pemeriksaan ruang penyimpanan tidak didukung di browser ini.");
+            resolve(false);  // Batalkan unggahan jika API tidak didukung
         }
-    });
-}
-
-// Fungsi untuk mendapatkan sidik jari perangkat menggunakan FingerprintJS
-function getDeviceFingerprint() {
-    return FingerprintJS.load().then(fp => {
-        return fp.get().then(fingerprint => {
-            console.log("Fingerprint perangkat:", fingerprint.visitorId); // Menggunakan visitorId sebagai sidik jari
-            return fingerprint.visitorId;
-        });
     });
 }
 
@@ -73,11 +66,6 @@ function handleFileUpload() {
     // Dapatkan taskId yang unik untuk tugas ini (misalnya, ID file)
     const taskId = file.name;
 
-    // Mendapatkan fingerprint perangkat
-    getDeviceFingerprint().then(fingerprint => {
-        console.log("Fingerprint perangkat:", fingerprint);
-
-        // Upload file setelah memastikan bahwa tugas belum selesai dan ruang cukup
-        uploadFile(file, taskId);
-    });
+    // Upload file setelah memastikan bahwa tugas belum selesai dan ruang cukup
+    uploadFile(file, taskId);
 }
