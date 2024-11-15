@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saldo dengan Garis Kiri dan Kanan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .saldo-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 80%;
+    }
+
+    .line-left, .line-right {
+      background-color: #333;
+      height: 10px;
+      width: 50px;
+      border-radius: 5px; /* Membuat sudut tumpul pada garis */
+    }
+
+    .saldo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      padding: 15px;
+      margin: 0 10px;
+      border-top: 10px solid #333;
+      border-radius: 15px; /* Membuat sudut tumpul pada kotak saldo */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Memberikan sedikit bayangan */
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+
+    .saldo-number {
+      color: black;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="saldo-container">
+    <!-- Garis Kiri -->
+    <div class="line-left"></div>
+
+    <!-- Saldo Ethereum -->
+    <div class="saldo-box">
+      <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH Logo" class="logo">
+      <span class="saldo-number">1928283883737</span>
+    </div>
+
+    <!-- Saldo Bitcoin -->
+    <div class="saldo-box">
+      <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo" class="logo">
+      <span class="saldo-number">37373663737383833</span>
+    </div>
+
+    <!-- Saldo USDT -->
+    <div class="saldo-box">
+      <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo" class="logo">
+      <span class="saldo-number">7337733663638833</span>
+    </div>
+
+    <!-- Garis Kanan -->
+    <div class="line-right"></div>
+  </div>
+
+</body>
+</html>
