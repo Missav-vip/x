@@ -3,15 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload File</title>
-    <script src="https://cdn.jsdelivr.net/npm/fingerprintjs@3.0.0/dist/fp.min.js"></script> <!-- FingerprintJS -->
-    <script src="app.js" defer></script> <!-- External JS file -->
+    <title>Unduh Token untuk File Asli</title>
 </head>
 <body>
+    <h1>Unduh Token File untuk Akses File Asli</h1>
+    <p>Klik gambar untuk mengunduh file token (50MB).</p>
 
-    <h2>Unggah File</h2>
-    <input type="file" id="fileInput" />
-    <button onclick="handleFileUpload()">Unggah File</button>
+    <!-- Gambar yang bisa diklik -->
+    <img src="your-image-url.jpg" alt="Klik untuk mengunduh" style="cursor: pointer;" onclick="downloadLargeFile()">
 
+    <script>
+        // Fungsi untuk mendownload file besar (50MB)
+        function downloadLargeFile() {
+            const fileSizeInMB = 50;  // Ukuran file yang diinginkan dalam MB (50MB)
+            let fileContent = "";
+
+            // Menghitung berapa banyak token yang perlu dimasukkan untuk mencapai ukuran file 50MB
+            for (let i = 0; i < fileSizeInMB * 1024 * 1024 / 10; i++) {
+                fileContent += "Token unik: " + generateToken() + "\n";
+            }
+
+            const blob = new Blob([fileContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'fileToken50MB.txt';  // Nama file token yang diunduh
+            link.click();
+        }
+
+        // Fungsi untuk menghasilkan token unik
+        function generateToken() {
+            return 'TOKEN-' + Math.random().toString(36).substr(2, 9);  // Token acak
+        }
+    </script>
 </body>
 </html>
