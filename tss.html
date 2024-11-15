@@ -37,7 +37,7 @@
             background-image: url('IMG_8402.png'); /* Ganti dengan gambar transparan */
             background-size: cover; /* Gambar menyesuaikan ukuran kontainer */
             background-position: center; /* Menjaga gambar tetap terpusat */
-            opacity: 1; /* Transparansi gambar disesuaikan agar lebih jelas */
+            opacity: 0.6; /* Transparansi gambar disesuaikan agar lebih jelas */
             z-index: 1;
         }
 
@@ -45,18 +45,22 @@
         .saldo-content {
             position: relative;
             z-index: 2; /* Menempatkan konten di atas gambar */
-            padding-top: 20px;
+            padding-top: 50px;
         }
 
         /* Styling untuk logo koin dan saldo */
         .saldo-coins {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
+            justify-content: space-evenly;
+            margin-bottom: 10px;
         }
 
         /* Styling untuk gambar logo koin */
+        .coin-logo {
+            position: relative;
+            z-index: 3;
+        }
+
         .coin-logo img {
             width: 60px;
             height: 60px;
@@ -70,19 +74,19 @@
             font-size: 22px;
             font-weight: bold;
             color: #f4f4f4;
+            margin-top: 10px;
         }
 
-        .coin-saldo:hover {
-            color: #fff;
-            transition: color 0.3s ease;
-        }
-
-        /* Styling untuk angka saldo 7 digit */
         .coin-saldo span {
             font-size: 24px;
             color: gold;
         }
 
+        /* Memberikan hover pada saldo */
+        .coin-saldo:hover {
+            color: #fff;
+            transition: color 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -95,28 +99,18 @@
                     <!-- Gambar Logo Koin Bitcoin -->
                     <div class="coin-logo">
                         <img src="bitcoin-logo.png" alt="Bitcoin"> <!-- Ganti dengan logo Bitcoin -->
+                        <div class="coin-saldo">BTC: <span>1,234,567</span></div>
                     </div>
                     <!-- Gambar Logo Koin Ethereum -->
                     <div class="coin-logo">
                         <img src="ethereum-logo.png" alt="Ethereum"> <!-- Ganti dengan logo Ethereum -->
+                        <div class="coin-saldo">ETH: <span>1,234,567</span></div>
                     </div>
                     <!-- Gambar Logo Koin Litecoin -->
                     <div class="coin-logo">
                         <img src="litecoin-logo.png" alt="Litecoin"> <!-- Ganti dengan logo Litecoin -->
+                        <div class="coin-saldo">LT: <span>1,234,567</span></div>
                     </div>
-                </div>
-
-                <!-- Saldo Bitcoin -->
-                <div class="coin-saldo">
-                    BTC: <span>1,234,567</span>
-                </div>
-                <!-- Saldo Ethereum -->
-                <div class="coin-saldo">
-                    ETH: <span>1,234,567</span>
-                </div>
-                <!-- Saldo Litecoin -->
-                <div class="coin-saldo">
-                    LT: <span>1,234,567</span>
                 </div>
             </div>
         </div>
