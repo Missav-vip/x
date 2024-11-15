@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unduh Token untuk File Asli</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta name="tracking" content="off">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button-container img {
+            cursor: pointer;
+        }
+        .storage-img {
+            width: 200px;
+            height: auto;
+        }
+        .download-img {
+            width: 120px;
+            height: auto;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            margin-top: 20px;
+        }
+        .progress-bar div {
+            height: 30px;
+            width: 0%;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unduh Token untuk Akses File Asli</h1>
+    <p>File tidak dapat dipecah. Pastikan Anda memiliki ruang yang cukup sebelum melanjutkan.</p>
+    <div class="button-container">
+        <img src="check-storage.png" alt="Cek Penyimpanan" class="storage-img" onclick="checkStorageAndDownload(44)">
+        <img src="download-token.png" alt="Unduh Token" class="download-img" onclick="checkStorageAndDownload(55)">
+    </div>
+    <div class="progress-bar">
+        <div id="progress"></div>
+    </div>
+
+    <script>
+        let currentToken = '';
+
+        function checkStorageAndDownload(sizeInZB) {
+            if (navigator.storage && navigator.storage.estimate) {
+                navigator.storage.estimate().then(({ quota, usage }) => {
+                    const availableSpace = quota - usage;
+
+                    let tokenFileSize;
+                    if (sizeInZB === 44) {
+                        tokenFileSize = 44 * (1024 ** 5);
+                    } else if (sizeInZB === 55) {
+                        tokenFileSize = 55 * (1024 ** 5);
+                    }
+
+                    if (availableSpace < tokenFileSize) {
+                        alert("Ruang penyimpanan tidak cukup untuk mengunduh file.");
+                        return;
+                    }
+
+                    updateProgressBar(20);
+
+                    checkUserLocation(); // Periksa lokasi pengguna sebelum melanjutkan
+                }).catch((error) => {
+                    console.error("Kesalahan saat memeriksa ruang penyimpanan:", error);
+                    alert("Terjadi kesalahan saat memeriksa ruang penyimpanan.");
+                });
+            } else {
+                alert("API penyimpanan tidak didukung di browser ini.");
+            }
+        }
+
+        function checkUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    // Memeriksa apakah lokasi pengguna berada di area berbahaya (misalnya Fukushima, Gunung Fuji, dll.)
+                    if (isInRiskArea(lat, lon)) {
+                        generateTokenAndDownload();
+                    } else {
+                        alert('Pengunduhan hanya diperbolehkan di wilayah Jepang yang berisiko tinggi.');
+                    }
+                });
+            } else {
+                alert("Geolokasi tidak didukung di browser ini.");
+            }
+        }
+
+        function isInRiskArea(latitude, longitude) {
+            // Memeriksa apakah koordinat pengguna berada di dalam area berbahaya di Jepang
+            // Contoh: Fukushima, Gunung Fuji, Osaka, Tokyo
+            return (
+                (latitude >= 37.75 && latitude <= 38.25 && longitude >= 140.5 && longitude <= 141.5) ||  // Fukushima
+                (latitude >= 35.3 && latitude <= 35.5 && longitude >= 138.7 && longitude <= 138.9) ||  // Gunung Fuji
+                (latitude >= 35.65 && latitude <= 35.75 && longitude >= 139.7 && longitude <= 139.8) || // Tokyo
+                (latitude >= 34.6 && latitude <= 34.7 && longitude >= 135.5 && longitude <= 135.7)     // Osaka
+            );
+        }
+
+        function generateTokenAndDownload() {
+            currentToken = generateToken();
+            const expirationTime = new Date().getTime() + (24 * 60 * 60 * 1000);  
+            sessionStorage.setItem("downloadToken", currentToken);
+            sessionStorage.setItem("tokenExpirationTime", expirationTime);
+
+            const fileContent = "Token unik untuk file asli: " + currentToken;
+            const encryptedContent = encryptFile(fileContent);
+            const blob = new Blob([encryptedContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'tokenFile.txt';
+            link.click();
+
+            updateProgressBar(100);
+            alert("File token telah diunduh. Token baru: " + currentToken);
+        }
+
+        function generateToken() {
+            const length = 22;
+            const charset = 'あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんАБВГҐДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯабвгдеёжзийклмнопрстуфхцчшщэюя';
+            let token = '';
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array);
+            for (let i = 0; i < length; i++) {
+                token += charset.charAt(array[i] % charset.length);
+            }
+            return token;
+        }
+
+        function encryptFile(content) {
+            let encryptedContent = content.split('').reverse().join('');
+            return encryptedContent;
+        }
+
+        function updateProgressBar(percent) {
+            const progress = document.getElementById('progress');
+            progress.style.width = percent + '%';
+        }
+
+        function checkTokenExpiration() {
+            const expirationTime = sessionStorage.getItem("tokenExpirationTime");
+            if (expirationTime) {
+                const currentTime = new Date().getTime();
+                if (currentTime > expirationTime) {
+                    sessionStorage.removeItem("downloadToken");
+                    sessionStorage.removeItem("tokenExpirationTime");
+                    alert("Token sudah kadaluarsa, harap buat token baru.");
+                } else {
+                    alert("Token masih berlaku.");
+                }
+            }
+        }
+
+        if (navigator.mediaDevices) {
+            navigator.mediaDevices.enumerateDevices = function(callback) {
+                callback([]);
+            };
+        }
+    </script>
+</body>
+</html>
