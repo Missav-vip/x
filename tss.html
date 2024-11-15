@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saldo dengan Gambar Latar Belakang</title>
+  <title>Saldo dengan 2 Latar Belakang</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,42 +18,52 @@
     .saldo-container {
       text-align: center;
       padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      box-sizing: border-box;
     }
 
-    .top-line, .bottom-line {
-      width: 100%;
-      height: 3px; /* Garis tipis */
-      background-color: #000; /* Garis panjang */
-      margin-bottom: 10px;
-    }
-
+    /* Latar belakang pertama (utama) untuk seluruh area */
     .saldo-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-image: url('37E799D0-43CD-4770-9986-BC120D67A56A.png'); /* Ganti dengan URL gambar latar belakang */
+      background-image: url('37E799D0-43CD-4770-9986-BC120D67A56A.png'); /* Ganti dengan gambar latar belakang utama */
       background-size: cover;
       background-position: center;
       border-radius: 10px;
-      width: 200px; /* Lebar kotak */
-      padding: 10px;
-      color: white; /* Teks akan putih agar kontras dengan gambar */
+      padding: 20px;
+      color: white;
+      position: relative;
+    }
+
+    /* Latar belakang kedua untuk bagian atas kotak */
+    .top-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px; /* Tinggi bagian atas */
+      background-image: url('https://via.placeholder.com/500x60?text=Top+Background'); /* Ganti dengan gambar latar belakang atas */
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px 10px 0 0; /* Untuk melengkungkan sudut atas */
     }
 
     .logo-container {
       display: flex;
       justify-content: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .logo {
       width: 40px;
       height: 40px;
-      margin: 0 5px;
+      margin: 0 10px;
     }
 
     .saldo-number {
-      font-size: 24px;
+      font-size: 32px;
       font-weight: bold;
     }
   </style>
@@ -61,11 +71,12 @@
 <body>
 
   <div class="saldo-container">
-    <!-- Garis atas -->
-    <div class="top-line"></div>
-
-    <!-- Kotak saldo dengan gambar latar belakang -->
+    <!-- Kotak saldo dengan gambar latar belakang utama -->
     <div class="saldo-box">
+      <!-- Latar belakang atas (gambar kedua) -->
+      <div class="top-background"></div>
+
+      <!-- Konten saldo -->
       <div class="logo-container">
         <!-- Logo 1 (Ethereum) -->
         <img src="https://via.placeholder.com/40x40?text=ETH" alt="Ethereum Logo" class="logo">
@@ -76,9 +87,6 @@
         <span>12345</span> <!-- Ganti dengan angka saldo yang sesuai -->
       </div>
     </div>
-
-    <!-- Garis bawah -->
-    <div class="bottom-line"></div>
   </div>
 
 </body>
