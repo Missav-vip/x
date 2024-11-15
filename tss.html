@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saldo Mewah</title>
+    <title>Saldo Koin</title>
     <style>
         /* Wrapper utama agar saldo tampil di tengah halaman */
         .saldo-wrapper {
@@ -16,7 +16,7 @@
 
         /* Container saldo dengan latar belakang abu-abu */
         .saldo-container {
-            width: 350px;  /* Lebar saldo */
+            width: 400px;  /* Lebar saldo */
             height: 250px; /* Tinggi saldo */
             position: relative;
             background-color: rgba(44, 44, 46, 0.8); /* Latar belakang gelap semi-transparan */
@@ -32,7 +32,7 @@
             box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.7); /* Efek bayangan lebih dramatis */
         }
 
-        /* Gambar transparan yang akan menutupi saldo */
+        /* Gambar transparan yang akan ditempatkan di atas saldo */
         .saldo-container::before {
             content: '';
             position: absolute;
@@ -40,27 +40,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('IMG_8402.png'); /* Gambar transparan yang diupload */
+            background-image: url('transparent-image.png'); /* Gambar transparan yang diupload */
             background-size: cover; /* Mengatur ukuran gambar agar pas */
             background-position: center; /* Mengatur posisi gambar */
             opacity: 0.6; /* Transparansi gambar */
-            z-index: 1; /* Agar gambar berada di belakang konten saldo */
+            z-index: 2; /* Gambar berada di atas konten saldo */
         }
 
         /* Konten saldo yang ditampilkan di atas gambar transparan */
         .saldo-content {
             position: relative;
-            z-index: 2; /* Agar konten berada di atas gambar */
+            z-index: 3; /* Konten saldo di atas gambar */
             text-align: center;
             color: #fff;
             font-family: 'Arial', sans-serif;
         }
 
-        /* Styling untuk logo di atas angka saldo */
-        .saldo-logo img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%; /* Membuat logo berbentuk lingkaran */
+        /* Styling untuk logo koin (Bitcoin, Ethereum, Litecoin) */
+        .saldo-coins {
+            display: flex;
+            justify-content: space-evenly; /* Menyebar koin secara merata */
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Styling untuk tiap koin */
+        .coin-logo img {
+            width: 50px; /* Ukuran koin */
+            height: 50px;
+            border-radius: 50%;
             border: 3px solid gold; /* Border emas untuk kesan mewah */
             padding: 5px;
         }
@@ -85,9 +93,20 @@
         <div class="saldo-container">
             <!-- Gambar dan nomor saldo -->
             <div class="saldo-content">
-                <div class="saldo-logo">
-                    <img src="your-logo.png" alt="Logo" /> <!-- Ganti dengan logo yang diinginkan -->
+                <!-- Bagian Koin -->
+                <div class="saldo-coins">
+                    <div class="coin-logo">
+                        <img src="bitcoin-logo.png" alt="Bitcoin"> <!-- Ganti dengan logo Bitcoin -->
+                    </div>
+                    <div class="coin-logo">
+                        <img src="ethereum-logo.png" alt="Ethereum"> <!-- Ganti dengan logo Ethereum -->
+                    </div>
+                    <div class="coin-logo">
+                        <img src="litecoin-logo.png" alt="Litecoin"> <!-- Ganti dengan logo Litecoin -->
+                    </div>
                 </div>
+
+                <!-- Angka saldo -->
                 <div class="saldo-number">
                     1000 USD <!-- Ganti dengan angka saldo yang diinginkan -->
                 </div>
