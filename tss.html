@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saldo dengan Logo</title>
+  <title>Saldo dengan Logo dan Koin</title>
   <style>
     /* Kontainer Utama */
     .saldo-container {
@@ -53,6 +53,28 @@
       font-size: 36px;  /* Ukuran angka */
       font-weight: bold;
     }
+
+    /* Koin Container */
+    .coin-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* Koin */
+    .coin {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: gold; /* Warna koin */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -79,6 +101,13 @@
       
       <!-- Garis Bawah -->
       <div class="bottom-border"></div>
+
+      <!-- Koin -->
+      <div class="coin-container">
+        <div class="coin">1</div>
+        <div class="coin">2</div>
+        <div class="coin">3</div>
+      </div>
     </div>
 
     <!-- Garis Kanan -->
